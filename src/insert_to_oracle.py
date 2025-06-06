@@ -6,7 +6,7 @@ import pandas as pd
 df = pd.read_csv('data/cleaned_reviews.csv')
 
 # 3. Connect to Oracle DB
-dsn_tns = cx_Oracle.makedsn('localhost', 1521, service_name='XE')
+dsn_tns = cx_Oracle.makedsn('DESKTOP-I1S9JBO', 1521, service_name='XE')
 conn = cx_Oracle.connect(user='BEL', password='Adey793010!@', dsn=dsn_tns)
 cursor = conn.cursor()
 
