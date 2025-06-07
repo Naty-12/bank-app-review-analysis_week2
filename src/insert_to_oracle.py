@@ -25,14 +25,18 @@ for command in sql_commands:
 # Insert banks
 banks = df['bank'].unique()
 bank_id_map = {}
+
 for bank in banks:
-    try:
-        cursor.execute("INSERT INTO Banks (bank_name) VALUES (:1)", [bank])
-    except:
-        pass  # skip if already inserted
     cursor.execute("SELECT bank_id FROM Banks WHERE bank_name = :1", [bank])
-    bank_id = cursor.fetchone()[0]
-    bank_id_map[bank] = bank_id
+    result = cursor.fetchone()
+    if result:
+        # Bank already exists, get id
+        bank_id_map[bank] = result[0]
+    else:
+        # Insert new bank
+        cursor.execute("INSERT INTO Banks (bank_name) VALUES (:1)", [bank])
+        cursor.execute("SELECT bank_id FROM Banks WHERE bank_name = :1", [bank])
+        bank_id_map[bank] = cursor.fetchone()[0]
 
 # Insert reviews
 for _, row in df.iterrows():
