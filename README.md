@@ -21,3 +21,7 @@ Bank-app-review-analysis/
 ├── requirements.txt
 └── README.md
 ```
+### Methods used 
+- Sentiment analysis using Textblob, Vader and machine learning aproach
+- Key word extraction using TF_IDF
+- Clustering/grouping using Kmeans 
